@@ -25,10 +25,17 @@ const SIGNFORM_ARRAY = [{
 },
 ]
 
-const SignUpForm = function () {
-    return <S.Form>
+const SignUpForm = function ({ formState }) {
+
+    const onSUbmitSignUp = (event) => {
+        event.preventDefault()
+        const email = event.target.email.value
+        alert(`${email}님 환영합니다`)
+        formState = 'SIGN-IN'
+    }
+    return <S.Form onSubmit={onSUbmitSignUp}>
         {SIGNFORM_ARRAY.map((form, index) =>
-            <Forminput key={index} size={form.size} lable={form.lable}
+            <Forminput key={index} size={form.size} lable={form.lable} name={form.name}
                 placeholder={form.option?.placeholder}></Forminput>
         )}
 

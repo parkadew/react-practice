@@ -1,20 +1,74 @@
-import React from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import styled from "styled-components";
+import { flexAlignCenter, flexCenter } from "../styles/common";
+import TDButton from "../component/component1/TButton";
+import AddTodoModal from "./_components/addTodoModal";
+import Todolist from "./_components/todoList";
+
+const Todo = () => {
+
+    let isOpenAddTodoModal = false;
 
 
-const Todo = function () {
-    const { id } = useParams()
-    // 구글링으로 해석하길 useParams를 통해 id 값을 가져온것이다
-    // usePrams로 id 를 가져오지않으면 useSearchParams가 id를 찾지못한다
-    // 그러면 주소를 가져올떄 근데 어떻게 todo의 id를 가져온것이지? --> "react-router-dom"?
-    // SearchParams를 통해 그 주소의 값을 가져올수있다
-    console.log(id)
-    const [SearchParams] = useSearchParams()
-    console.log(SearchParams.get("goods"))
-    return <div>todo페이지요</div>
+    const todos = [
+        {
+            id: 1,
+            title: "example-1",
+            content: "example-1",
+            state: true
+        },
+        {
+            id: 2,
+            title: "example-2",
+            content: "example-2",
+            state: false
+        }
+    ]
+
+    return <div>
+        <>
+            {isOpenAddTodoModal && <AddTodoModal todos={todos} />}
+            <S.Wrapper>
+                <S.Container>
+                    <S.Title>TODOLIST</S.Title>
+                    <Todolist todos={todos} />
+                    <TDButton size={'full'} variant={'primary'}>
+                        추가
+                    </TDButton>
+                </S.Container>
+            </S.Wrapper>
+        </>
+    </div>
+}
+export default Todo
+
+const Wrapper = styled.div`
+  height: 100vh;
+  ${flexCenter};
+`;
+
+const Container = styled.div`
+  width: 420px;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+`;
+const Title = styled.h1`
+  background-color: ${(props) => props.theme.colors.primary};
+  // themeProvider로 전달된 theme 객체는
+  // 콜백함수의 theme이라는 key로 전달 theme.colors.primary
+
+  color: ${({ theme }) => theme.colors.text.white};
+  padding-left: 32px;
+  height: 32px;
+  ${flexAlignCenter};
+`;
 
 
-
+const S = {
+    Wrapper,
+    Container,
+    Title
 }
 
-export default Todo

@@ -6,7 +6,7 @@ import SignInForm from '../component/Sign-IN-form'
 
 
 const Main = () => {
-    let formState = "SIGN-UP"
+    let formState = "SIGN-IN"
     //내가 formState 변수를 설장하고 사용하려는 이유가 뭘까
     // 버튼 클릭에따라 보여주고싶은것들이 다르기 떄문이다.
     // Sign-IN을 클릭하면 Sign-IN이 보여야지요
@@ -38,7 +38,7 @@ const Main = () => {
                 </S.Tab>)}
             </S.Header>
             {
-                formState === 'SIGN-IN' ? <SignInForm /> : <SignUpForm />
+                formState === 'SIGN-IN' ? <SignInForm /> : <SignUpForm formState={formState} />
             }
         </S.Container>
     </S.Wrapper>
